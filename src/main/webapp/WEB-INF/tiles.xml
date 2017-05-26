@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<definition name="Monitorador" template="/WEB-INF/base.jsp">
+	    <put-attribute name="controller" value="" />
+	    <put-attribute name="header" value="" />
+	</definition>
+	
+	<definition name="Monitorador.Painel" template="/WEB-INF/base.jsp" extends="Monitorador">
+		<put-attribute name="controller" value="painel" />
+		<put-attribute name="body" value="/WEB-INF/views/painel/painel.jsp" />
+	</definition>	
+	
+	<definition name="Monitorador.Site" template="/WEB-INF/base.jsp" extends="Monitorador">
+		<put-attribute name="controller" value="cadastroServidor" />
+		<put-attribute name="body" value="/WEB-INF/views/site/cadastro/cadastroSite.jsp" />
+	</definition>
+	
+</tiles-definitions>
