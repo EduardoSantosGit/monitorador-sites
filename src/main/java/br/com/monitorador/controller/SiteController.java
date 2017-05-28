@@ -13,7 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.monitorador.entity.Site;
 import br.com.monitorador.service.SiteServiceDatabase;
+import br.com.monitorador.service.SiteServiceWeb;
 import br.com.monitorador.vo.SiteVO;
+import br.com.monitorador.vo.StatusServicoSiteVO;
 
 @Controller
 @RequestMapping("site")
@@ -21,6 +23,9 @@ public class SiteController {
 	
 	@Autowired
 	private SiteServiceDatabase siteServiceDatabase;
+	
+	@Autowired
+	private SiteServiceWeb siteServiceWeb;
 	
 	@RequestMapping
 	public ModelAndView index(){
@@ -35,12 +40,10 @@ public class SiteController {
 		site.setNmeSite(siteVO.getNmeSite());
 		site.setUrlSite(siteVO.getUrlSite());
 		
-		//RestTemplate restTemplate = new RestTemplate();
-		//String teste = restTemplate.getForObject("http://127.0.0.1:8580/servicoweb/ping/www.google.com", String.class);
-		
-		//System.out.println(teste);
-		
 		siteServiceDatabase.salvaSiteMysql(site);
+		
+		StatusServicoSiteVO s = siteServiceWeb.executaPing(site);
+		System.out.println(s.getStatusPing());
 		
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
